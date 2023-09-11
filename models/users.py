@@ -11,6 +11,7 @@ class User(Document):
 
     class Settings:
         name = "users"
+
     class Config:
         schema_extra = {
             "example": {
@@ -22,6 +23,5 @@ class User(Document):
 
 
 class TokenResponse(BaseModel):
-    access_token:str
-    token_type:str
-
+    access_token: str
+    token_type: str

@@ -9,7 +9,7 @@ class Event(Document):
     description: str
     tags: List[str]
     location: str
-    creator:Optional[str]
+    creator: Optional[str]
 
     class Config:
         schema_extra = {
@@ -21,6 +21,7 @@ class Event(Document):
                 "location": "Google Meet",
             }
         }
+
     class Settings:
         name = "events"
 
