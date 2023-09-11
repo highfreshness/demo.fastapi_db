@@ -44,12 +44,12 @@ class Database:
         return True
     
 class Settings(BaseSettings):
-    DATABASE_URL : Optional[str] = "mongodb://localhost:27017/planner"
-
+    DATABASE_URL : Optional[str] = None
+    SECRET_KEY : Optional[str] = None
     
     async def initialize_database(self):
         client = AsyncIOMotorClient(self.DATABASE_URL)
         await init_beanie(database=client.get_default_database(), document_models=[User, Event])
         
-        class Config:
-            env_file = ".env"
+    class Config:
+        env_file = ".env"
