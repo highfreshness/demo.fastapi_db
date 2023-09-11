@@ -1,17 +1,16 @@
-from sqlmodel import JSON, SQLModel, Field, Column
+from pydantic import BaseModel
+from beanie import Document
 from typing import Optional, List
 
 
-class Event(SQLModel, table=True):
-    id: int = Field(default=None, primary_key=True)
+class Event(Document):
     title: str
     image: str
     description: str
-    tags: List[str] = Field(sa_column=Column(JSON))
+    tags: List[str]
     location: str
 
     class Config:
-        arbitrary_types_allowed = True
         schema_extra = {
             "example": {
                 "title": "FastAPI Book Launch",
@@ -21,9 +20,11 @@ class Event(SQLModel, table=True):
                 "location": "Google Meet",
             }
         }
+    class Settings:
+        name = "events"
 
 
-class EventUpdate(SQLModel):
+class EventUpdate(BaseModel):
     title: Optional[str]
     image: Optional[str]
     description: Optional[str]
